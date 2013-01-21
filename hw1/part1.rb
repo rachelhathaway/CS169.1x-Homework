@@ -14,6 +14,10 @@ def palindrome?(str)
   end
 end
 
+def better_palindrome?(str)
+  return str.downcase.gsub(/[^a-z]/, '') == str.downcase.gsub(/[^a-z]/, '').reverse
+end
+
 def count_words(str)
   str = str.downcase.gsub(/[^a-z ]/, '')
   words = str.split(' ')

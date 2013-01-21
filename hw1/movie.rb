@@ -4,7 +4,7 @@ class Movie
   # attr_accessor :year
   
   def initialize(title, year)
-    @title = title
+    @title = [title]
     @year = year
   end
   
