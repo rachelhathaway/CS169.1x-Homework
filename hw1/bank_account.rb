@@ -26,23 +26,38 @@ class Numeric
     
 end
 
-class String
 
-  def palindrome?
-    str = self.downcase.gsub(/[^a-z]/, '')
-    return str == str.reverse
+class Account
+  
+  attr_accessor :name, :pin
+  attr_reader :balance
+  
+  def initialize(name, pin, balance=0)
+    @name = name
+    @pin = pin
+    @balance = balance
   end
   
-end
-
-module Enumerable
+  def deposit(pin, amount)
+    correct_pin?(pin) { @balance += amount }
+  end
   
-  def palindrome?
-    begin
-      return self.to_a == self.to_a.reverse
-    rescue NoMethodError
-      false
+  def withdraw(pin, amount)
+    correct_pin?(pin) {
+      if @balance >= amount
+        @balance -= amount
+      else
+        "You don't have enough money to do that."
+      end
+    }
+  end
+  
+  def correct_pin?(pin)
+    if @pin == pin
+      yield
+    else
+      "You entered an incorrect pin."
     end
-  end
+  end 
   
 end
